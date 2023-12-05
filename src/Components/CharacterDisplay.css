@@ -1,0 +1,13 @@
+.head{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.image{
+    display: flow;
+    width: 20%;
+}
+.name{
+    width: 100%;
+}

@@ -2,27 +2,74 @@
 import './App.css'
 import Blog from "./Pages/Blog.tsx";
 import {Character} from "./Model/Character.ts";
-import {Origin} from "./Model/Origin.ts";
+import {useEffect, useState} from "react";
+import {Info} from "./Model/Info.ts";
 
 
 function App() {
+    const [characters1, setCharacters] = useState<Character[]>([])
+    const [info1,setInfo] = useState<Info>({
+        count:0,
+        pages:0,
+        next:"",
+        prev:null
+    });
+    useEffect(() => {
+        fetch('https://rickandmortyapi.com/api/character/')
+            .then((response) => response.json())
+            .then((data) => {
+                // Relevante Daten aus der API-Antwort extrahieren
+                const infoData: Info = data.results;
+                setInfo(infoData);
+            })
+            .catch((error) => console.error('Fehler beim Abrufen der Daten:', error));
+    }, []);
 
-    const origin: Origin = {
-        name:"Earth",
-        url:" "
+    const fetchCharacters = function (url:string) {
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                // Relevante Daten aus der API-Antwort extrahieren
+                const characterData: Character[] = data.results;
+
+                // Setze den Zustand auf die neuen Charaktere und aktualisiere die Info
+                setCharacters(characterData);
+                setInfo({
+                    count: data.info.count,
+                    pages: data.info.pages,
+                    next: data.info.next,
+                    prev: data.info.prev
+                });
+            })
+            .catch((error) => console.error('Fehler beim Abrufen der Daten:', error));
+    };
+    const fetchNextCharacters = () => {
+        if (typeof info1.next === "string") {
+            fetchCharacters(info1.next)
+        }
+
     }
-    const character:Character = {
-        id: 2,
-        name:"Morty Smith",
-        age:15,
-        origin: origin,
-        image: "https://rickandmortyapi.com/api/character/avatar/2.jpeg"
+    const fetchPrevCharacters = () => {
+        if (typeof info1.prev === "string") {
+            fetchCharacters(info1.prev)
+        }
+
     }
-    const characters1: Character[]=[character,character,character,character];
+    useEffect(() => {
+        fetchCharacters('https://rickandmortyapi.com/api/character/')
+    }, []);
+
+
+
+
+
+
   return (
     <>
-        {characters1 &&
+        {characters1.length>0 &&
         <Blog characters={characters1}/>}
+        <button onClick={fetchPrevCharacters}>prev</button>
+        <button onClick={fetchNextCharacters}>next</button>
     </>
   )
 }

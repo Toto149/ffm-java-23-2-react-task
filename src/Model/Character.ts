@@ -1,9 +1,10 @@
 import {Origin} from "./Origin.ts";
 
-export type Character = {
+export interface Character  {
     id: number,
     name: string,
-    age:number,
-    origin:Origin,
+    status: string,
+    origin: Origin,
+    location: Origin,
     image:string
 }

@@ -1,13 +1,24 @@
 .head{
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: flex-start;
 }
 .image{
     display: flow;
-    width: 20%;
+    width: 40%;
 }
 .name{
-    width: 100%;
+    display: flow;
+    width: 40%;
+}
+.list{
+    margin-left: 13px;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.container{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    width: 50%;
+    flex-direction: column;
+
 }

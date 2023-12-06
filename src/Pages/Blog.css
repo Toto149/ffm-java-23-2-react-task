@@ -1,7 +1,8 @@
 .blog{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
-    width: 200%;
-    height: 40%;
+    width: 100%;
+    margin: 0px;
+    height: 200%;
 }

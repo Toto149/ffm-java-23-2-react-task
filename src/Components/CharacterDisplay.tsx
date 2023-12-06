@@ -7,24 +7,27 @@ export default function CharacterDisplay(character: Character){
 
 
     return(
+
         <div class="container">
-            <div>
             <div class="head" >
                 <img src={character.image} alt={character.name} class="image"/>
             </div>
             <div class="name">
-                <h3>{character.name}</h3>
+                <h5>{character.name}</h5>
             </div>
-            </div>
+
             <div class="list">
                 <li>
-                    Age: {character.age}
+                    Status: {character.status}
                 </li>
                 <li>
                     Origin: {character.origin.name}
                 </li>
+                <li>
+                    Location: {character.location.name}
+                </li>
             </div>
-        </div>
+            </div>
     )
 
 
